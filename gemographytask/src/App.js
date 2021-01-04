@@ -16,11 +16,13 @@ const App = () => {
     const year = lastMonthDate.getFullYear();
     const month = lastMonthDate.getMonth() + 1; //Last month
     const day = lastMonthDate.getDate();
-    const url = `https://api.github.com/search/repositories?q=created:%3E${year}-${month}-${day}&sort=stars&order=desc`;
-
+    console.log(year,month,day)
+    const url = `https://api.github.com/search/repositories?q=created:>2020-12-05&sort=stars&order=desc`;
+    
+    console.log(url);
     const fetchRepos = async () => {
       setLoading(true);
-
+      console.log(url)
       const res = await axios.get(url);
       console.log(res.data.items.length);
       setRepos(res.data.items);
@@ -39,9 +41,7 @@ const App = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
     <div className="container mt-5">
-      <h1 className="text-primary mb-3">
-        Github repos that were created in the last 30 days
-      </h1>
+     
       <Repos repos={currentRepos} loading={loading} />
       <Pagination
         reposPerPage={reposPerPage}
